@@ -19,7 +19,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html, body { height: 100%; }
 
     body {
@@ -89,21 +88,6 @@
       will-change: transform;
     }
 
-    .logo-stage::before {
-      content: "";
-      position: absolute;
-      left: 18.4%;
-      top: 49%;
-      width: 72px;
-      height: 72px;
-      transform: translate(-50%, -50%) rotate(45deg);
-      border-radius: 12px;
-      background: rgba(0,148,95,.12);
-      filter: blur(13px);
-      animation: verifyPulse 3.2s ease-in-out infinite;
-      pointer-events: none;
-    }
-
     .logo {
       position: relative;
       z-index: 1;
@@ -114,6 +98,52 @@
       filter: drop-shadow(0 16px 26px rgba(16,20,26,.035));
       transform: translateZ(18px);
     }
+
+    /* The uploaded logo is a flat PNG. This layer redraws only the symbol as SVG
+       so its four brackets can actually open and close independently. */
+    .verify-mark {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      top: 0;
+      width: 31.4%;
+      height: 100%;
+      background: var(--bg);
+      pointer-events: none;
+      transform: translateZ(24px);
+    }
+
+    .verify-mark svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .verify-glow {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: glowPulse 3.6s ease-in-out infinite;
+    }
+
+    .verify-diamond {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: diamondPulse 3.6s ease-in-out infinite;
+    }
+
+    .bracket {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-duration: 3.6s;
+      animation-timing-function: cubic-bezier(.55,.08,.34,.98);
+      animation-iteration-count: infinite;
+    }
+
+    .bracket.tl { animation-name: closeTL; }
+    .bracket.tr { animation-name: closeTR; }
+    .bracket.bl { animation-name: closeBL; }
+    .bracket.br { animation-name: closeBR; }
 
     .eyebrow,
     h1,
@@ -174,9 +204,34 @@
       letter-spacing: .08em;
     }
 
-    @keyframes verifyPulse {
-      0%, 100% { opacity: .38; transform: translate(-50%, -50%) rotate(45deg) scale(.82); }
-      50% { opacity: .88; transform: translate(-50%, -50%) rotate(45deg) scale(1.08); }
+    @keyframes closeTL {
+      0%, 18%, 82%, 100% { transform: translate(0,0); }
+      43%, 57% { transform: translate(15px,15px); }
+    }
+
+    @keyframes closeTR {
+      0%, 18%, 82%, 100% { transform: translate(0,0); }
+      43%, 57% { transform: translate(-15px,15px); }
+    }
+
+    @keyframes closeBL {
+      0%, 18%, 82%, 100% { transform: translate(0,0); }
+      43%, 57% { transform: translate(15px,-15px); }
+    }
+
+    @keyframes closeBR {
+      0%, 18%, 82%, 100% { transform: translate(0,0); }
+      43%, 57% { transform: translate(-15px,-15px); }
+    }
+
+    @keyframes diamondPulse {
+      0%, 18%, 82%, 100% { transform: scale(1); }
+      43%, 57% { transform: scale(.94); }
+    }
+
+    @keyframes glowPulse {
+      0%, 18%, 82%, 100% { opacity: .12; transform: scale(.85); }
+      43%, 57% { opacity: .38; transform: scale(1.12); }
     }
 
     @keyframes enter {
@@ -192,7 +247,6 @@
       body { overflow: auto; }
       main { padding: 34px 20px 70px; }
       .logo-stage { margin-bottom: 42px; width: min(610px, 94vw); }
-      .logo-stage::before { width: 54px; height: 54px; }
       .eyebrow { font-size: 11px; gap: 10px; letter-spacing: .26em; }
       .eyebrow::before,
       .eyebrow::after { width: 34px; }
@@ -218,7 +272,21 @@
     <section class="hero" aria-label="Varqo coming soon">
       <div class="logo-stage" id="logoStage">
         <img class="logo" src="varqo-logo.png" alt="Varqo" />
+
+        <div class="verify-mark" aria-hidden="true">
+          <svg viewBox="0 0 282 282" role="presentation">
+            <rect width="282" height="282" fill="#fafcfe"/>
+            <rect class="verify-glow" x="83" y="83" width="116" height="116" rx="14" fill="rgba(0,148,95,.18)" transform="rotate(45 141 141)"/>
+            <polygon class="verify-diamond" points="141,81 201,141 141,201 81,141" fill="#00945f"/>
+
+            <path class="bracket tl" d="M37 99 V37 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path class="bracket tr" d="M181 37 H245 V99" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path class="bracket bl" d="M37 183 V245 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path class="bracket br" d="M181 245 H245 V183" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </div>
       </div>
+
       <div class="eyebrow">Coming Soon</div>
       <h1>Integrity for autonomous AI agents.</h1>
       <p class="description">Independent verification before and after consequential agent actions.</p>
