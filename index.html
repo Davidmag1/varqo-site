@@ -14,6 +14,8 @@
       --muted: #66707b;
       --green: #00945f;
       --line: rgba(16, 20, 26, 0.12);
+      --mouse-x: 50vw;
+      --mouse-y: 50vh;
     }
 
     * { box-sizing: border-box; }
@@ -22,8 +24,9 @@
 
     body {
       margin: 0;
+      overflow: hidden;
       background:
-        radial-gradient(circle at 50% 42%, rgba(0,148,95,.055), transparent 30%),
+        radial-gradient(circle at 50% 42%, rgba(0,148,95,.05), transparent 31%),
         var(--bg);
       color: var(--ink);
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
@@ -31,7 +34,41 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    .grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .2;
+      background-image:
+        linear-gradient(rgba(16,20,26,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,20,26,.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(circle at 50% 48%, black 0%, rgba(0,0,0,.55) 34%, transparent 76%);
+      mask-image: radial-gradient(circle at 50% 48%, black 0%, rgba(0,0,0,.55) 34%, transparent 76%);
+      animation: gridDrift 24s linear infinite;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      left: var(--mouse-x);
+      top: var(--mouse-y);
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(0,148,95,.105) 0%, rgba(0,148,95,.045) 31%, transparent 68%);
+      filter: blur(6px);
+      opacity: 0;
+      transition: opacity .45s ease;
+      z-index: 0;
+    }
+
+    body.pointer-active .cursor-glow { opacity: 1; }
+
     main {
+      position: relative;
+      z-index: 2;
       min-height: 100%;
       display: grid;
       place-items: center;
@@ -44,15 +81,50 @@
       transform: translateY(-1vh);
     }
 
-    .logo {
-      display: block;
+    .logo-stage {
+      position: relative;
       width: min(690px, 86vw);
-      height: auto;
       margin: 0 auto 54px;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .logo-stage::before {
+      content: "";
+      position: absolute;
+      left: 18.4%;
+      top: 49%;
+      width: 72px;
+      height: 72px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-radius: 12px;
+      background: rgba(0,148,95,.12);
+      filter: blur(13px);
+      animation: verifyPulse 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: auto;
       mix-blend-mode: multiply;
+      filter: drop-shadow(0 16px 26px rgba(16,20,26,.035));
+      transform: translateZ(18px);
+    }
+
+    .eyebrow,
+    h1,
+    .description {
+      opacity: 0;
+      transform: translateY(9px);
+      animation: enter .75s cubic-bezier(.2,.75,.25,1) forwards;
     }
 
     .eyebrow {
+      animation-delay: .15s;
       display: inline-flex;
       align-items: center;
       gap: 15px;
@@ -73,6 +145,7 @@
     }
 
     h1 {
+      animation-delay: .28s;
       margin: 26px 0 10px;
       font-size: clamp(27px, 3.4vw, 43px);
       line-height: 1.08;
@@ -80,7 +153,8 @@
       font-weight: 650;
     }
 
-    p {
+    .description {
+      animation-delay: .4s;
       margin: 0 auto;
       max-width: 620px;
       color: var(--muted);
@@ -90,6 +164,7 @@
 
     footer {
       position: fixed;
+      z-index: 2;
       left: 0;
       right: 0;
       bottom: 24px;
@@ -99,27 +174,99 @@
       letter-spacing: .08em;
     }
 
+    @keyframes verifyPulse {
+      0%, 100% { opacity: .38; transform: translate(-50%, -50%) rotate(45deg) scale(.82); }
+      50% { opacity: .88; transform: translate(-50%, -50%) rotate(45deg) scale(1.08); }
+    }
+
+    @keyframes enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gridDrift {
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(56px,56px,0); }
+    }
+
     @media (max-width: 620px) {
+      body { overflow: auto; }
       main { padding: 34px 20px 70px; }
-      .logo { margin-bottom: 42px; width: min(610px, 94vw); }
+      .logo-stage { margin-bottom: 42px; width: min(610px, 94vw); }
+      .logo-stage::before { width: 54px; height: 54px; }
       .eyebrow { font-size: 11px; gap: 10px; letter-spacing: .26em; }
       .eyebrow::before,
       .eyebrow::after { width: 34px; }
       footer { bottom: 16px; }
+      .cursor-glow { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+      .cursor-glow { display: none; }
     }
   </style>
 </head>
 <body>
+  <div class="grid" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <main>
     <section class="hero" aria-label="Varqo coming soon">
-      <img class="logo" src="varqo-logo.png" alt="Varqo" />
+      <div class="logo-stage" id="logoStage">
+        <img class="logo" src="varqo-logo.png" alt="Varqo" />
+      </div>
       <div class="eyebrow">Coming Soon</div>
       <h1>Integrity for autonomous AI agents.</h1>
-      <p>
-        Independent verification before and after consequential agent actions.
-      </p>
+      <p class="description">Independent verification before and after consequential agent actions.</p>
     </section>
   </main>
+
   <footer>VARQO.AI</footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const body = document.body;
+      const logo = document.getElementById('logoStage');
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!finePointer || reducedMotion) return;
+
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let frame = null;
+
+      const animate = () => {
+        currentX += (targetX - currentX) * 0.075;
+        currentY += (targetY - currentY) * 0.075;
+        logo.style.transform = `perspective(900px) rotateX(${currentY * -1.15}deg) rotateY(${currentX * 1.35}deg) translate3d(${currentX * 3.2}px, ${currentY * 2.4}px, 0)`;
+        frame = requestAnimationFrame(animate);
+      };
+
+      window.addEventListener('pointermove', (event) => {
+        root.style.setProperty('--mouse-x', `${event.clientX}px`);
+        root.style.setProperty('--mouse-y', `${event.clientY}px`);
+        body.classList.add('pointer-active');
+
+        targetX = (event.clientX / window.innerWidth - 0.5) * 2;
+        targetY = (event.clientY / window.innerHeight - 0.5) * 2;
+
+        if (!frame) frame = requestAnimationFrame(animate);
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        body.classList.remove('pointer-active');
+        targetX = 0;
+        targetY = 0;
+      });
+    })();
+  </script>
 </body>
 </html>
