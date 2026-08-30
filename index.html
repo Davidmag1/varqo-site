@@ -99,8 +99,6 @@
       transform: translateZ(18px);
     }
 
-    /* The uploaded logo is a flat PNG. This layer redraws only the symbol as SVG
-       so its four brackets can actually open and close independently. */
     .verify-mark {
       position: absolute;
       z-index: 3;
@@ -120,30 +118,36 @@
       overflow: visible;
     }
 
-    .verify-glow {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: glowPulse 3.6s ease-in-out infinite;
-    }
-
-    .verify-diamond {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: diamondPulse 3.6s ease-in-out infinite;
-    }
-
+    .verify-glow,
+    .verify-diamond,
     .bracket {
       transform-box: fill-box;
       transform-origin: center;
-      animation-duration: 3.6s;
+    }
+
+    .verify-glow {
+      opacity: .12;
+      transform: scale(.85);
+    }
+
+    .logo-stage.is-near .verify-glow {
+      animation: glowPulse 1.45s ease-in-out infinite;
+    }
+
+    .logo-stage.is-near .verify-diamond {
+      animation: diamondPulse 1.45s ease-in-out infinite;
+    }
+
+    .logo-stage.is-near .bracket {
+      animation-duration: 1.45s;
       animation-timing-function: cubic-bezier(.55,.08,.34,.98);
       animation-iteration-count: infinite;
     }
 
-    .bracket.tl { animation-name: closeTL; }
-    .bracket.tr { animation-name: closeTR; }
-    .bracket.bl { animation-name: closeBL; }
-    .bracket.br { animation-name: closeBR; }
+    .logo-stage.is-near .bracket.tl { animation-name: closeTL; }
+    .logo-stage.is-near .bracket.tr { animation-name: closeTR; }
+    .logo-stage.is-near .bracket.bl { animation-name: closeBL; }
+    .logo-stage.is-near .bracket.br { animation-name: closeBR; }
 
     .eyebrow,
     h1,
@@ -205,33 +209,33 @@
     }
 
     @keyframes closeTL {
-      0%, 18%, 82%, 100% { transform: translate(0,0); }
-      43%, 57% { transform: translate(15px,15px); }
+      0%, 12%, 88%, 100% { transform: translate(0,0); }
+      42%, 58% { transform: translate(15px,15px); }
     }
 
     @keyframes closeTR {
-      0%, 18%, 82%, 100% { transform: translate(0,0); }
-      43%, 57% { transform: translate(-15px,15px); }
+      0%, 12%, 88%, 100% { transform: translate(0,0); }
+      42%, 58% { transform: translate(-15px,15px); }
     }
 
     @keyframes closeBL {
-      0%, 18%, 82%, 100% { transform: translate(0,0); }
-      43%, 57% { transform: translate(15px,-15px); }
+      0%, 12%, 88%, 100% { transform: translate(0,0); }
+      42%, 58% { transform: translate(15px,-15px); }
     }
 
     @keyframes closeBR {
-      0%, 18%, 82%, 100% { transform: translate(0,0); }
-      43%, 57% { transform: translate(-15px,-15px); }
+      0%, 12%, 88%, 100% { transform: translate(0,0); }
+      42%, 58% { transform: translate(-15px,-15px); }
     }
 
     @keyframes diamondPulse {
-      0%, 18%, 82%, 100% { transform: scale(1); }
-      43%, 57% { transform: scale(.94); }
+      0%, 12%, 88%, 100% { transform: scale(1); }
+      42%, 58% { transform: scale(.94); }
     }
 
     @keyframes glowPulse {
-      0%, 18%, 82%, 100% { opacity: .12; transform: scale(.85); }
-      43%, 57% { opacity: .38; transform: scale(1.12); }
+      0%, 12%, 88%, 100% { opacity: .12; transform: scale(.85); }
+      42%, 58% { opacity: .38; transform: scale(1.12); }
     }
 
     @keyframes enter {
@@ -273,7 +277,7 @@
       <div class="logo-stage" id="logoStage">
         <img class="logo" src="varqo-logo.png" alt="Varqo" />
 
-        <div class="verify-mark" aria-hidden="true">
+        <div class="verify-mark" id="verifyMark" aria-hidden="true">
           <svg viewBox="0 0 282 282" role="presentation">
             <rect width="282" height="282" fill="#fafcfe"/>
             <rect class="verify-glow" x="83" y="83" width="116" height="116" rx="14" fill="rgba(0,148,95,.18)" transform="rotate(45 141 141)"/>
@@ -300,6 +304,7 @@
       const root = document.documentElement;
       const body = document.body;
       const logo = document.getElementById('logoStage');
+      const verifyMark = document.getElementById('verifyMark');
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -318,6 +323,15 @@
         frame = requestAnimationFrame(animate);
       };
 
+      const updateVerificationState = (event) => {
+        const rect = verifyMark.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+        const triggerRadius = Math.max(165, rect.width * 1.05);
+        logo.classList.toggle('is-near', distance <= triggerRadius);
+      };
+
       window.addEventListener('pointermove', (event) => {
         root.style.setProperty('--mouse-x', `${event.clientX}px`);
         root.style.setProperty('--mouse-y', `${event.clientY}px`);
@@ -325,12 +339,14 @@
 
         targetX = (event.clientX / window.innerWidth - 0.5) * 2;
         targetY = (event.clientY / window.innerHeight - 0.5) * 2;
+        updateVerificationState(event);
 
         if (!frame) frame = requestAnimationFrame(animate);
       }, { passive: true });
 
       document.addEventListener('mouseleave', () => {
         body.classList.remove('pointer-active');
+        logo.classList.remove('is-near');
         targetX = 0;
         targetY = 0;
       });
