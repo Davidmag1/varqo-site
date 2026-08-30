@@ -16,6 +16,7 @@
       --line: rgba(16, 20, 26, 0.12);
       --mouse-x: 50vw;
       --mouse-y: 50vh;
+      --verify-speed: 720ms;
     }
 
     * { box-sizing: border-box; }
@@ -123,6 +124,9 @@
     .bracket {
       transform-box: fill-box;
       transform-origin: center;
+      transition-duration: var(--verify-speed);
+      transition-timing-function: cubic-bezier(.55,.08,.34,.98);
+      transition-property: transform, opacity;
     }
 
     .verify-glow {
@@ -130,24 +134,27 @@
       transform: scale(.85);
     }
 
-    .logo-stage.is-near .verify-glow {
-      animation: glowPulse 1.45s ease-in-out infinite;
+    .verify-diamond {
+      transform: scale(1);
     }
 
-    .logo-stage.is-near .verify-diamond {
-      animation: diamondPulse 1.45s ease-in-out infinite;
+    .bracket {
+      transform: translate(0,0);
     }
 
-    .logo-stage.is-near .bracket {
-      animation-duration: 1.45s;
-      animation-timing-function: cubic-bezier(.55,.08,.34,.98);
-      animation-iteration-count: infinite;
+    .logo-stage.is-closed .verify-glow {
+      opacity: .38;
+      transform: scale(1.12);
     }
 
-    .logo-stage.is-near .bracket.tl { animation-name: closeTL; }
-    .logo-stage.is-near .bracket.tr { animation-name: closeTR; }
-    .logo-stage.is-near .bracket.bl { animation-name: closeBL; }
-    .logo-stage.is-near .bracket.br { animation-name: closeBR; }
+    .logo-stage.is-closed .verify-diamond {
+      transform: scale(.94);
+    }
+
+    .logo-stage.is-closed .bracket.tl { transform: translate(15px,15px); }
+    .logo-stage.is-closed .bracket.tr { transform: translate(-15px,15px); }
+    .logo-stage.is-closed .bracket.bl { transform: translate(15px,-15px); }
+    .logo-stage.is-closed .bracket.br { transform: translate(-15px,-15px); }
 
     .eyebrow,
     h1,
@@ -206,36 +213,6 @@
       color: #8b939c;
       font-size: 12px;
       letter-spacing: .08em;
-    }
-
-    @keyframes closeTL {
-      0%, 12%, 88%, 100% { transform: translate(0,0); }
-      42%, 58% { transform: translate(15px,15px); }
-    }
-
-    @keyframes closeTR {
-      0%, 12%, 88%, 100% { transform: translate(0,0); }
-      42%, 58% { transform: translate(-15px,15px); }
-    }
-
-    @keyframes closeBL {
-      0%, 12%, 88%, 100% { transform: translate(0,0); }
-      42%, 58% { transform: translate(15px,-15px); }
-    }
-
-    @keyframes closeBR {
-      0%, 12%, 88%, 100% { transform: translate(0,0); }
-      42%, 58% { transform: translate(-15px,-15px); }
-    }
-
-    @keyframes diamondPulse {
-      0%, 12%, 88%, 100% { transform: scale(1); }
-      42%, 58% { transform: scale(.94); }
-    }
-
-    @keyframes glowPulse {
-      0%, 12%, 88%, 100% { opacity: .12; transform: scale(.85); }
-      42%, 58% { opacity: .38; transform: scale(1.12); }
     }
 
     @keyframes enter {
@@ -310,11 +287,14 @@
 
       if (!finePointer || reducedMotion) return;
 
+      const VERIFY_SPEED = 720;
       let targetX = 0;
       let targetY = 0;
       let currentX = 0;
       let currentY = 0;
       let frame = null;
+      let verifyTimer = null;
+      let near = false;
 
       const animate = () => {
         currentX += (targetX - currentX) * 0.075;
@@ -323,13 +303,39 @@
         frame = requestAnimationFrame(animate);
       };
 
+      const stopVerification = () => {
+        if (verifyTimer) {
+          clearInterval(verifyTimer);
+          verifyTimer = null;
+        }
+        logo.classList.remove('is-closed');
+      };
+
+      const startVerification = () => {
+        if (verifyTimer) return;
+
+        logo.classList.add('is-closed');
+        verifyTimer = setInterval(() => {
+          logo.classList.toggle('is-closed');
+        }, VERIFY_SPEED);
+      };
+
       const updateVerificationState = (event) => {
         const rect = verifyMark.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
         const triggerRadius = Math.max(165, rect.width * 1.05);
-        logo.classList.toggle('is-near', distance <= triggerRadius);
+        const nextNear = distance <= triggerRadius;
+
+        if (nextNear === near) return;
+        near = nextNear;
+
+        if (near) {
+          startVerification();
+        } else {
+          stopVerification();
+        }
       };
 
       window.addEventListener('pointermove', (event) => {
@@ -346,7 +352,8 @@
 
       document.addEventListener('mouseleave', () => {
         body.classList.remove('pointer-active');
-        logo.classList.remove('is-near');
+        near = false;
+        stopVerification();
         targetX = 0;
         targetY = 0;
       });
