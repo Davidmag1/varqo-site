@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fafcfe" />
+  <meta name="description" content="Varqo — Integrity for autonomous AI agents." />
+  <title>Varqo — Coming Soon</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <style>
+    :root {
+      --bg: #fafcfe;
+      --ink: #10141a;
+      --muted: #66707b;
+      --green: #00945f;
+      --line: rgba(16, 20, 26, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(0,148,95,.055), transparent 30%),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 48px 24px;
+    }
+
+    .hero {
+      width: min(920px, 100%);
+      text-align: center;
+      transform: translateY(-1vh);
+    }
+
+    .logo {
+      display: block;
+      width: min(690px, 86vw);
+      height: auto;
+      margin: 0 auto 54px;
+      mix-blend-mode: multiply;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 66px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    h1 {
+      margin: 26px 0 10px;
+      font-size: clamp(27px, 3.4vw, 43px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-weight: 650;
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(16px, 1.5vw, 19px);
+      line-height: 1.7;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 24px;
+      text-align: center;
+      color: #8b939c;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 620px) {
+      main { padding: 34px 20px 70px; }
+      .logo { margin-bottom: 42px; width: min(610px, 94vw); }
+      .eyebrow { font-size: 11px; gap: 10px; letter-spacing: .26em; }
+      .eyebrow::before,
+      .eyebrow::after { width: 34px; }
+      footer { bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Varqo coming soon">
+      <img class="logo" src="assets/varqo-logo.png" alt="Varqo" />
+      <div class="eyebrow">Coming Soon</div>
+      <h1>Integrity for autonomous AI agents.</h1>
+      <p>
+        Independent verification before and after consequential agent actions.
+      </p>
+    </section>
+  </main>
+  <footer>VARQO.AI</footer>
+</body>
+</html>
