@@ -32,6 +32,7 @@
     "name": "Varqo",
     "url": "https://varqo.ai/",
     "logo": "https://varqo.ai/varqo-logo.png",
+    "email": "contact@varqo.ai",
     "description": "Integrity for autonomous AI agents."
   }
   </script>
@@ -158,28 +159,12 @@
       transition-property: transform, opacity;
     }
 
-    .verify-glow {
-      opacity: .12;
-      transform: scale(.85);
-    }
+    .verify-glow { opacity: .12; transform: scale(.85); }
+    .verify-diamond { transform: scale(1); }
+    .bracket { transform: translate(0,0); }
 
-    .verify-diamond {
-      transform: scale(1);
-    }
-
-    .bracket {
-      transform: translate(0,0);
-    }
-
-    .logo-stage.is-closed .verify-glow {
-      opacity: .38;
-      transform: scale(1.12);
-    }
-
-    .logo-stage.is-closed .verify-diamond {
-      transform: scale(.94);
-    }
-
+    .logo-stage.is-closed .verify-glow { opacity: .38; transform: scale(1.12); }
+    .logo-stage.is-closed .verify-diamond { transform: scale(.94); }
     .logo-stage.is-closed .bracket.tl { transform: translate(15px,15px); }
     .logo-stage.is-closed .bracket.tr { transform: translate(-15px,15px); }
     .logo-stage.is-closed .bracket.bl { transform: translate(15px,-15px); }
@@ -187,7 +172,8 @@
 
     .eyebrow,
     h1,
-    .description {
+    .description,
+    .contact-link {
       opacity: 0;
       transform: translateY(9px);
       animation: enter .75s cubic-bezier(.2,.75,.25,1) forwards;
@@ -232,6 +218,37 @@
       line-height: 1.7;
     }
 
+    .contact-link {
+      animation-delay: .52s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: .07em;
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .contact-link::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--green);
+      transition: width .2s ease;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .contact-link:hover::before,
+    .contact-link:focus-visible::before { width: 30px; }
+
     footer {
       position: fixed;
       z-index: 2;
@@ -255,11 +272,12 @@
 
     @media (max-width: 620px) {
       body { overflow: auto; }
-      main { padding: 34px 20px 70px; }
+      main { padding: 34px 20px 88px; }
       .logo-stage { margin-bottom: 42px; width: min(610px, 94vw); }
       .eyebrow { font-size: 11px; gap: 10px; letter-spacing: .26em; }
       .eyebrow::before,
       .eyebrow::after { width: 34px; }
+      .contact-link { margin-top: 20px; font-size: 12px; }
       footer { bottom: 16px; }
       .cursor-glow { display: none; }
     }
@@ -288,7 +306,6 @@
             <rect width="282" height="282" fill="#fafcfe"/>
             <rect class="verify-glow" x="83" y="83" width="116" height="116" rx="14" fill="rgba(0,148,95,.18)" transform="rotate(45 141 141)"/>
             <polygon class="verify-diamond" points="141,81 201,141 141,201 81,141" fill="#00945f"/>
-
             <path class="bracket tl" d="M37 99 V37 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
             <path class="bracket tr" d="M181 37 H245 V99" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
             <path class="bracket bl" d="M37 183 V245 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
@@ -300,6 +317,7 @@
       <div class="eyebrow">Coming Soon</div>
       <h1>Integrity for autonomous AI agents.</h1>
       <p class="description">Independent verification before and after consequential agent actions.</p>
+      <a class="contact-link" href="mailto:contact@varqo.ai" aria-label="Email Varqo at contact@varqo.ai">CONTACT — contact@varqo.ai</a>
     </section>
   </main>
 
@@ -342,7 +360,6 @@
 
       const startVerification = () => {
         if (verifyTimer) return;
-
         logo.classList.add('is-closed');
         verifyTimer = setInterval(() => {
           logo.classList.toggle('is-closed');
@@ -360,11 +377,8 @@
         if (nextNear === near) return;
         near = nextNear;
 
-        if (near) {
-          startVerification();
-        } else {
-          stopVerification();
-        }
+        if (near) startVerification();
+        else stopVerification();
       };
 
       window.addEventListener('pointermove', (event) => {
