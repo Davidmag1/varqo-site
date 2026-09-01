@@ -1,4 +1,9 @@
 (() => {
+  if (/^https?:$/.test(window.location.protocol) && window.location.pathname.endsWith('/index.html')) {
+    const cleanPath = window.location.pathname.slice(0, -'index.html'.length);
+    window.history.replaceState(null, '', `${cleanPath}${window.location.search}${window.location.hash}`);
+  }
+
   const header = document.querySelector('.site-header');
   const year = document.querySelector('[data-year]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
