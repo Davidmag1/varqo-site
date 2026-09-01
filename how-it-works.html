@@ -12,6 +12,43 @@
   <main>
     <section class="page-hero"><div class="container"><div class="eyebrow">How Varqo works</div><h1>An integrity control loop between AI intent and <span>real-world state.</span></h1><p class="lead">Varqo determines what must be true for a workflow to continue, independently proves those states across systems, and controls dependent execution from the result.</p></div></section>
 
+    <section class="section simulator-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="kicker">Interactive control simulator</span>
+          <div><h2>See what changes when provider success is not enough.</h2><p class="lead">Choose a scenario and run the workflow. The simulation follows control patterns exercised in live Varqo experiments; it does not call a live provider.</p></div>
+        </div>
+
+        <div class="simulator reveal" data-simulator>
+          <div class="simulator-toolbar">
+            <div class="scenario-picker" role="group" aria-label="Choose a verification scenario">
+              <button class="scenario-option selected" type="button" data-scenario="verified" aria-pressed="true"><span>01</span> Verified outcome</button>
+              <button class="scenario-option" type="button" data-scenario="false-success" aria-pressed="false"><span>02</span> False provider success</button>
+              <button class="scenario-option" type="button" data-scenario="timeout" aria-pressed="false"><span>03</span> Verifier timeout</button>
+            </div>
+            <div class="simulator-label"><i aria-hidden="true"></i> Based on a live validated workflow</div>
+          </div>
+
+          <div class="simulator-body">
+            <div class="simulator-chain" aria-label="Simulated verification chain">
+              <div class="sim-event" data-event="0"><span class="sim-marker">1</span><div><span class="sim-role">Agent action</span><strong data-event-title>Waiting to run</strong><code data-event-value>—</code></div><span class="sim-state" data-event-state>READY</span></div>
+              <div class="sim-event" data-event="1"><span class="sim-marker">2</span><div><span class="sim-role">Provider response</span><strong data-event-title>Not observed</strong><code data-event-value>—</code></div><span class="sim-state" data-event-state>PENDING</span></div>
+              <div class="sim-event" data-event="2"><span class="sim-marker">3</span><div><span class="sim-role">Independent verifier</span><strong data-event-title>Not executed</strong><code data-event-value>—</code></div><span class="sim-state" data-event-state>PENDING</span></div>
+              <div class="sim-event" data-event="3"><span class="sim-marker">4</span><div><span class="sim-role">Dependent action</span><strong data-event-title>Awaiting proof</strong><code data-event-value>—</code></div><span class="sim-state" data-event-state>HELD</span></div>
+            </div>
+
+            <aside class="decision-panel" aria-live="polite" aria-atomic="true">
+              <span class="label">Varqo decision</span>
+              <strong class="decision-value" data-decision>READY</strong>
+              <p data-decision-copy>Select a scenario, then run the workflow.</p>
+              <div class="decision-rule"><span>Control invariant</span><code>release only after required state is independently verified</code></div>
+              <button class="sim-run" type="button" data-run>Run workflow <span aria-hidden="true">→</span></button>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section"><div class="container scenario"><div class="scenario-copy reveal"><span class="kicker">The control decision</span><h2>Dependent actions move only when their required state is proven.</h2><p>Varqo prepares the proof before the consequential write whenever possible. After the write, it binds only the runtime identity returned by the provider, executes an independent verifier, and evaluates the observation against the required outcome.</p><p>A successful write response is evidence of the action — not automatic permission for the workflow to continue.</p></div><div class="scenario-flow reveal" aria-label="Varqo verification and control flow"><div class="scenario-step"><span class="who">Prepare</span><strong>Compile required outcome and verifier</strong><em>BEFORE WRITE</em></div><div class="scenario-step"><span class="who">Bind</span><strong>Attach provider-returned runtime identity</strong><em>RUNTIME</em></div><div class="scenario-step"><span class="who">Verify</span><strong>Read authoritative state independently</strong><em>OBSERVE</em></div><div class="scenario-step"><span class="who">Control</span><strong>Allow, hold, or block dependent action</strong><em>DECIDE</em></div><div class="scenario-step"><span class="who">Prove</span><strong>Preserve the evidence chain safely</strong><em>RECORD</em></div></div></div></section>
 
     <section class="section"><div class="container"><div class="section-heading reveal"><span class="kicker">Safety principles</span><div><h2>The verifier is independent. Ambiguity never becomes permission.</h2><p class="lead">The control boundary is designed around explicit proof rather than model confidence or a provider's success label.</p></div></div><div class="principles"><article class="principle reveal"><h3>Independent observation</h3><p>Varqo queries the authoritative provider state rather than treating the agent's own output as evidence.</p></article><article class="principle reveal"><h3>Requirement-bound verdicts</h3><p>Evidence counts only when it proves the specific condition the downstream workflow depends on.</p></article><article class="principle reveal"><h3>Fail closed</h3><p>Missing verifiers, malformed responses, unknown states, transport failures, and exhausted polling remain unresolved.</p></article><article class="principle reveal"><h3>Safe evidence</h3><p>Durable records preserve proof topology and verdicts without persisting raw tasks, provider bodies, or credential-like values.</p></article></div></div></section>
