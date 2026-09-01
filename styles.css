@@ -129,15 +129,6 @@ h3 { letter-spacing: -.02em; }
 .scenario-step em { padding: 5px 8px; border-radius: 5px; background: var(--soft); color: var(--green-dark); font: 750 9px ui-monospace,SFMono-Regular,Menlo,monospace; font-style: normal; }
 .scenario-step.warn em { background: var(--amber-pale); color: var(--amber); }
 
-.loop { display: grid; grid-template-columns: repeat(5,1fr); border-block: 1px solid var(--strong); }
-.step { position: relative; min-height: 230px; padding: 30px 24px; }
-.step + .step { border-left: 1px solid var(--line); }
-.step:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 46px; z-index: 2; width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--green); font-size: 12px; }
-.step-status { display: inline-block; margin-bottom: 55px; color: var(--green-dark); font: 750 9px ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing: .1em; text-transform: uppercase; }
-.step-status.partial { color: var(--amber); }
-.step-status.direction { color: #7f8983; }
-.step h3 { margin-bottom: 9px; font-size: 18px; }
-.step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .principles { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
 .principle, .evidence-card { padding: 31px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.72); }
 .principle h3, .evidence-card h3 { margin-bottom: 12px; font-size: 20px; }
@@ -183,11 +174,6 @@ footer { padding: 34px 0 44px; border-top: 1px solid var(--line); }
   .cards-three article { min-height: auto; }
   .cards-three article + article { border-left: 0; border-top: 1px solid var(--line); }
   .number { margin-bottom: 34px; }
-  .loop { grid-template-columns: 1fr; border: 1px solid var(--line); }
-  .step { min-height: auto; }
-  .step + .step { border-left: 0; border-top: 1px solid var(--line); }
-  .step:not(:last-child)::after { display: none; }
-  .step-status { margin-bottom: 28px; }
   .pilot-card { grid-template-columns: 1fr; align-items: start; }
   .pilot-card .button { width: auto; }
 }
