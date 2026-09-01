@@ -1,406 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#fafcfe" />
-  <meta name="description" content="Varqo — Integrity for autonomous AI agents. Independent verification before and after consequential agent actions." />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="application-name" content="Varqo" />
-
-  <title>Varqo — Integrity for Autonomous AI Agents</title>
-  <link rel="canonical" href="https://varqo.ai/" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Varqo" />
-  <meta property="og:title" content="Varqo — Integrity for Autonomous AI Agents" />
-  <meta property="og:description" content="Independent verification before and after consequential agent actions." />
-  <meta property="og:url" content="https://varqo.ai/" />
-  <meta property="og:image" content="https://varqo.ai/varqo-logo.png" />
-  <meta property="og:image:alt" content="Varqo logo" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Varqo — Integrity for Autonomous AI Agents" />
-  <meta name="twitter:description" content="Independent verification before and after consequential agent actions." />
-  <meta name="twitter:image" content="https://varqo.ai/varqo-logo.png" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Varqo",
-    "url": "https://varqo.ai/",
-    "logo": "https://varqo.ai/varqo-logo.png",
-    "email": "contact@varqo.ai",
-    "description": "Integrity for autonomous AI agents."
-  }
-  </script>
-
-  <style>
-    :root {
-      --bg: #fafcfe;
-      --ink: #10141a;
-      --muted: #66707b;
-      --green: #00945f;
-      --line: rgba(16, 20, 26, 0.12);
-      --mouse-x: 50vw;
-      --mouse-y: 50vh;
-      --verify-speed: 720ms;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-
-    body {
-      margin: 0;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 42%, rgba(0,148,95,.05), transparent 31%),
-        var(--bg);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .grid {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .2;
-      background-image:
-        linear-gradient(rgba(16,20,26,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(16,20,26,.045) 1px, transparent 1px);
-      background-size: 56px 56px;
-      -webkit-mask-image: radial-gradient(circle at 50% 48%, black 0%, rgba(0,0,0,.55) 34%, transparent 76%);
-      mask-image: radial-gradient(circle at 50% 48%, black 0%, rgba(0,0,0,.55) 34%, transparent 76%);
-      animation: gridDrift 24s linear infinite;
-    }
-
-    .cursor-glow {
-      position: fixed;
-      left: var(--mouse-x);
-      top: var(--mouse-y);
-      width: 460px;
-      height: 460px;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(0,148,95,.105) 0%, rgba(0,148,95,.045) 31%, transparent 68%);
-      filter: blur(6px);
-      opacity: 0;
-      transition: opacity .45s ease;
-      z-index: 0;
-    }
-
-    body.pointer-active .cursor-glow { opacity: 1; }
-
-    main {
-      position: relative;
-      z-index: 2;
-      min-height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 48px 24px;
-    }
-
-    .hero {
-      width: min(920px, 100%);
-      text-align: center;
-      transform: translateY(-1vh);
-    }
-
-    .logo-stage {
-      position: relative;
-      width: min(690px, 86vw);
-      margin: 0 auto 54px;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .logo {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: 100%;
-      height: auto;
-      mix-blend-mode: multiply;
-      filter: drop-shadow(0 16px 26px rgba(16,20,26,.035));
-      transform: translateZ(18px);
-    }
-
-    .verify-mark {
-      position: absolute;
-      z-index: 3;
-      left: 0;
-      top: 0;
-      width: 31.4%;
-      height: 100%;
-      background: var(--bg);
-      pointer-events: none;
-      transform: translateZ(24px);
-    }
-
-    .verify-mark svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .verify-glow,
-    .verify-diamond,
-    .bracket {
-      transform-box: fill-box;
-      transform-origin: center;
-      transition-duration: var(--verify-speed);
-      transition-timing-function: cubic-bezier(.55,.08,.34,.98);
-      transition-property: transform, opacity;
-    }
-
-    .verify-glow { opacity: .12; transform: scale(.85); }
-    .verify-diamond { transform: scale(1); }
-    .bracket { transform: translate(0,0); }
-
-    .logo-stage.is-closed .verify-glow { opacity: .38; transform: scale(1.12); }
-    .logo-stage.is-closed .verify-diamond { transform: scale(.94); }
-    .logo-stage.is-closed .bracket.tl { transform: translate(15px,15px); }
-    .logo-stage.is-closed .bracket.tr { transform: translate(-15px,15px); }
-    .logo-stage.is-closed .bracket.bl { transform: translate(15px,-15px); }
-    .logo-stage.is-closed .bracket.br { transform: translate(-15px,-15px); }
-
-    .eyebrow,
-    h1,
-    .description,
-    .contact-link {
-      opacity: 0;
-      transform: translateY(9px);
-      animation: enter .75s cubic-bezier(.2,.75,.25,1) forwards;
-    }
-
-    .eyebrow {
-      animation-delay: .15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .34em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .eyebrow::before,
-    .eyebrow::after {
-      content: "";
-      width: 66px;
-      height: 1px;
-      background: var(--line);
-    }
-
-    h1 {
-      animation-delay: .28s;
-      margin: 26px 0 10px;
-      font-size: clamp(27px, 3.4vw, 43px);
-      line-height: 1.08;
-      letter-spacing: -0.035em;
-      font-weight: 650;
-    }
-
-    .description {
-      animation-delay: .4s;
-      margin: 0 auto;
-      max-width: 620px;
-      color: var(--muted);
-      font-size: clamp(16px, 1.5vw, 19px);
-      line-height: 1.7;
-    }
-
-    .contact-link {
-      animation-delay: .52s;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 24px;
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 650;
-      letter-spacing: .04em;
-      transition: color .2s ease, transform .2s ease;
-    }
-
-    .contact-link::before {
-      content: "";
-      width: 20px;
-      height: 1px;
-      background: var(--green);
-      transition: width .2s ease;
-    }
-
-    .contact-link:hover,
-    .contact-link:focus-visible {
-      color: var(--green);
-      transform: translateY(-1px);
-    }
-
-    .contact-link:hover::before,
-    .contact-link:focus-visible::before { width: 30px; }
-
-    footer {
-      position: fixed;
-      z-index: 2;
-      left: 0;
-      right: 0;
-      bottom: 24px;
-      text-align: center;
-      color: #8b939c;
-      font-size: 12px;
-      letter-spacing: .08em;
-    }
-
-    @keyframes enter {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes gridDrift {
-      from { transform: translate3d(0,0,0); }
-      to { transform: translate3d(56px,56px,0); }
-    }
-
-    @media (max-width: 620px) {
-      body { overflow: auto; }
-      main { padding: 34px 20px 88px; }
-      .logo-stage { margin-bottom: 42px; width: min(610px, 94vw); }
-      .eyebrow { font-size: 11px; gap: 10px; letter-spacing: .26em; }
-      .eyebrow::before,
-      .eyebrow::after { width: 34px; }
-      .contact-link { margin-top: 20px; font-size: 12px; }
-      footer { bottom: 16px; }
-      .cursor-glow { display: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important;
-      }
-      .cursor-glow { display: none; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf8">
+  <meta name="description" content="Varqo independently verifies the states AI agents rely on and controls whether autonomous workflows can safely continue.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <title>Varqo — Execution Integrity for Autonomous AI</title>
+  <link rel="canonical" href="https://varqo.ai/">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Varqo">
+  <meta property="og:title" content="Varqo — Execution Integrity for Autonomous AI">
+  <meta property="og:description" content="Make autonomous workflows prove reality before they continue.">
+  <meta property="og:url" content="https://varqo.ai/">
+  <meta property="og:image" content="https://varqo.ai/varqo-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Varqo — Execution Integrity for Autonomous AI">
+  <meta name="twitter:description" content="Make autonomous workflows prove reality before they continue.">
+  <meta name="twitter:image" content="https://varqo.ai/varqo-logo.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Varqo","url":"https://varqo.ai/","logo":"https://varqo.ai/varqo-logo.png","email":"contact@varqo.ai","description":"Execution integrity for autonomous AI workflows."}</script>
 </head>
 <body>
   <div class="grid" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Varqo home"><img src="varqo-logo.png" alt="Varqo"></a>
+      <div class="nav-links">
+        <a href="problem.html">The problem</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="evidence.html">Evidence</a>
+        <a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Early pilot</a>
+      </div>
+    </nav>
+  </header>
 
   <main>
-    <section class="hero" aria-label="Varqo coming soon">
-      <div class="logo-stage" id="logoStage">
-        <img class="logo" src="varqo-logo.png" alt="Varqo" />
-
-        <div class="verify-mark" id="verifyMark" aria-hidden="true">
-          <svg viewBox="0 0 282 282" role="presentation">
-            <rect width="282" height="282" fill="#fafcfe"/>
-            <rect class="verify-glow" x="83" y="83" width="116" height="116" rx="14" fill="rgba(0,148,95,.18)" transform="rotate(45 141 141)"/>
-            <polygon class="verify-diamond" points="141,81 201,141 141,201 81,141" fill="#00945f"/>
-            <path class="bracket tl" d="M37 99 V37 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
-            <path class="bracket tr" d="M181 37 H245 V99" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
-            <path class="bracket bl" d="M37 183 V245 H101" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
-            <path class="bracket br" d="M181 245 H245 V183" fill="none" stroke="#10141a" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/>
-          </svg>
+    <div class="container hero">
+      <div>
+        <div class="eyebrow">Early technical POC · Design partners</div>
+        <h1>Make autonomous workflows <span>prove reality</span> before they continue.</h1>
+        <p class="hero-copy">Varqo independently verifies the states AI agents rely on, holds dependent actions when proof is missing, and releases execution only after reality matches intent.</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Explore an early pilot <span aria-hidden="true">→</span></a>
+          <a class="button" href="how-it-works.html">See how it works</a>
         </div>
+        <p class="hero-note">Built for consequential agent actions across cloud and enterprise systems.</p>
       </div>
 
-      <div class="eyebrow">Coming Soon</div>
-      <h1>Integrity for autonomous AI agents.</h1>
-      <p class="description">Independent verification before and after consequential agent actions.</p>
-      <a class="contact-link" href="mailto:contact@varqo.ai?subject=Early%20pilot%20inquiry" aria-label="Contact Varqo about an early pilot">Interested in an early pilot? — contact@varqo.ai</a>
+      <aside class="proof" aria-label="Example Varqo verification chain">
+        <div class="proof-bar"><span>Verification chain · live pattern</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <div class="proof-body">
+          <div class="intent"><span class="label">Agent intent</span><strong>Power on cloud machine</strong></div>
+          <div class="proof-row"><i class="dot"></i><div class="proof-main"><strong>Provider action</strong><span>status = completed</span></div><span class="verdict">OBSERVED</span></div>
+          <div class="proof-row hold"><i class="dot"></i><div class="proof-main"><strong>Independent resource read</strong><span>machine.state = off</span></div><span class="verdict">HOLD</span></div>
+          <div class="proof-row verified"><i class="dot"></i><div class="proof-main"><strong>Independent resource read</strong><span>machine.state = active</span></div><span class="verdict">VERIFIED</span></div>
+          <div class="proof-result"><span>Dependent workflow action</span><strong>RELEASED</strong></div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="home-paths" aria-label="Explore Varqo">
+      <div class="container path-grid reveal">
+        <a class="path-card" href="problem.html"><span class="path-number">01 / WHY</span><h2>The problem</h2><p>Why authorization and successful tool responses are not enough for autonomous execution.</p><span class="path-arrow">Explore the integrity gap →</span></a>
+        <a class="path-card" href="how-it-works.html"><span class="path-number">02 / HOW</span><h2>How Varqo works</h2><p>From workflow dependencies to independent proof and controlled continuation.</p><span class="path-arrow">See the control loop →</span></a>
+        <a class="path-card" href="evidence.html"><span class="path-number">03 / PROOF</span><h2>Technical evidence</h2><p>Live results across DigitalOcean, Azure, AWS, and a real tool-using agent.</p><span class="path-arrow">Review the evidence →</span></a>
+      </div>
+    </section>
+
+    <section class="pilot">
+      <div class="container">
+        <div class="pilot-card reveal">
+          <div><span class="kicker">Early design partnership</span><h2>Are your AI agents taking consequential actions in real systems?</h2><p>We want to work with teams operating agents with cloud or enterprise permissions and validate where execution integrity fails in practice.</p></div>
+          <a class="button" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry&body=Tell%20us%20briefly%20what%20your%20agents%20do%20and%20which%20systems%20they%20can%20change.">Talk to Varqo <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>VARQO.AI</footer>
-
-  <script>
-    (() => {
-      const root = document.documentElement;
-      const body = document.body;
-      const logo = document.getElementById('logoStage');
-      const verifyMark = document.getElementById('verifyMark');
-      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (!finePointer || reducedMotion) return;
-
-      const VERIFY_SPEED = 720;
-      let targetX = 0;
-      let targetY = 0;
-      let currentX = 0;
-      let currentY = 0;
-      let frame = null;
-      let verifyTimer = null;
-      let near = false;
-
-      const animate = () => {
-        currentX += (targetX - currentX) * 0.075;
-        currentY += (targetY - currentY) * 0.075;
-        logo.style.transform = `perspective(900px) rotateX(${currentY * -1.15}deg) rotateY(${currentX * 1.35}deg) translate3d(${currentX * 3.2}px, ${currentY * 2.4}px, 0)`;
-        frame = requestAnimationFrame(animate);
-      };
-
-      const stopVerification = () => {
-        if (verifyTimer) {
-          clearInterval(verifyTimer);
-          verifyTimer = null;
-        }
-        logo.classList.remove('is-closed');
-      };
-
-      const startVerification = () => {
-        if (verifyTimer) return;
-        logo.classList.add('is-closed');
-        verifyTimer = setInterval(() => {
-          logo.classList.toggle('is-closed');
-        }, VERIFY_SPEED);
-      };
-
-      const updateVerificationState = (event) => {
-        const rect = verifyMark.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
-        const triggerRadius = Math.max(165, rect.width * 1.05);
-        const nextNear = distance <= triggerRadius;
-
-        if (nextNear === near) return;
-        near = nextNear;
-
-        if (near) startVerification();
-        else stopVerification();
-      };
-
-      window.addEventListener('pointermove', (event) => {
-        root.style.setProperty('--mouse-x', `${event.clientX}px`);
-        root.style.setProperty('--mouse-y', `${event.clientY}px`);
-        body.classList.add('pointer-active');
-
-        targetX = (event.clientX / window.innerWidth - 0.5) * 2;
-        targetY = (event.clientY / window.innerHeight - 0.5) * 2;
-        updateVerificationState(event);
-
-        if (!frame) frame = requestAnimationFrame(animate);
-      }, { passive: true });
-
-      document.addEventListener('mouseleave', () => {
-        body.classList.remove('pointer-active');
-        near = false;
-        stopVerification();
-        targetX = 0;
-        targetY = 0;
-      });
-    })();
-  </script>
+  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Execution integrity for autonomous AI.</span><div class="footer-links"><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
+  <script src="site.js" defer></script>
 </body>
 </html>
