@@ -1,19 +1,4 @@
 (() => {
-  if (/^https?:$/.test(window.location.protocol)) {
-    const { pathname, search, hash } = window.location;
-    let cleanPath = pathname;
-
-    if (pathname.endsWith('/index.html')) {
-      cleanPath = pathname.slice(0, -'index.html'.length);
-    } else if (pathname.endsWith('.html')) {
-      cleanPath = pathname.slice(0, -'.html'.length);
-    }
-
-    if (cleanPath !== pathname) {
-      window.history.replaceState(null, '', `${cleanPath}${search}${hash}`);
-    }
-  }
-
   const header = document.querySelector('.site-header');
   const year = document.querySelector('[data-year]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
