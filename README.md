@@ -1,12 +1,14 @@
 # Varqo website
 
-Static landing page for https://varqo.ai
+Static website for https://varqo.ai
 
-Files:
-- `index.html`
-- `problem.html`
-- `how-it-works.html`
-- `evidence.html`
+Public routes:
+- `/`
+- `/problem/`
+- `/how-it-works/`
+- `/evidence/`
+
+Shared assets:
 - `styles.css`
 - `site.js`
 - `varqo-logo.png`
