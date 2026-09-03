@@ -10,6 +10,7 @@
   <link rel="canonical" href="https://varqo.ai/">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/action.css">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varqo">
   <meta property="og:title" content="Varqo — Execution Integrity for Autonomous AI">
@@ -61,6 +62,50 @@
       </aside>
     </div>
 
+    <section class="action-section" aria-labelledby="action-heading">
+      <div class="container">
+        <div class="action-intro reveal">
+          <span class="kicker">Varqo in action</span>
+          <div>
+            <h2 id="action-heading">Recorded live runs. Sanitized for public view.</h2>
+            <p class="lead">Replay three control paths already exercised against real providers and a real tool-using AI agent. The traces preserve the decision sequence while removing infrastructure identifiers and sensitive runtime data.</p>
+            <span class="action-proof-note">Not simulated · recorded from controlled live experiments</span>
+          </div>
+        </div>
+
+        <div class="action-console reveal" data-action-console>
+          <div class="action-tabs" role="group" aria-label="Choose a recorded Varqo run">
+            <button class="action-tab selected" type="button" data-action-run-id="mismatch" aria-pressed="true"><span>01 / OUTCOME</span>Provider success ≠ reality</button>
+            <button class="action-tab" type="button" data-action-run-id="aws" aria-pressed="false"><span>02 / LIFECYCLE</span>AWS runtime verification</button>
+            <button class="action-tab" type="button" data-action-run-id="agent" aria-pressed="false"><span>03 / CONTROL</span>Real agent held & released</button>
+          </div>
+
+          <div class="action-body">
+            <div class="action-trace">
+              <div class="action-trace-head">
+                <div><span class="label">Recorded trace</span><h3 data-action-title>Provider success. Workflow held.</h3><p data-action-subtitle>DigitalOcean · controlled live resource-state mismatch</p></div>
+                <span class="real-badge">LIVE VALIDATED</span>
+              </div>
+              <div class="action-events" data-action-events aria-live="polite"></div>
+            </div>
+
+            <aside class="action-summary" data-action-summary aria-live="polite" aria-atomic="true">
+              <span class="label">Varqo final decision</span>
+              <strong class="action-verdict" data-action-verdict>READY</strong>
+              <p class="action-copy" data-action-copy>Play the sanitized trace from the recorded live run.</p>
+              <div class="action-metric"><span data-action-metric-label>Control invariant</span><strong data-action-metric>action completed ≠ outcome verified</strong></div>
+              <button class="action-run" type="button" data-action-play>Play real run <span aria-hidden="true">→</span></button>
+            </aside>
+          </div>
+
+          <div class="action-footer">
+            <span>Public trace data is intentionally redacted; no credentials, provider resource IDs, or private repository links are exposed.</span>
+            <a href="/evidence/">See the technical evidence →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="home-paths" aria-label="Explore Varqo">
       <div class="container path-grid reveal">
         <a class="path-card" href="/problem/"><span class="path-number">01 / WHY</span><h2>The problem</h2><p>Why authorization and successful tool responses are not enough for autonomous execution.</p><span class="path-arrow">Explore the integrity gap →</span></a>
@@ -81,5 +126,6 @@
 
   <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Execution integrity for autonomous AI.</span><div class="footer-links"><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
   <script src="/site.js" defer></script>
+  <script src="/action.js" defer></script>
 </body>
 </html>
