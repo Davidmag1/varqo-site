@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7faf8">
-  <meta name="description" content="Varqo independently verifies the states AI agents rely on and controls whether autonomous workflows can safely continue.">
+  <meta name="description" content="Varqo is the execution integrity layer between autonomous AI and the real world: independently verify what agents rely on, control continuation, and build toward verified recovery.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <title>Varqo — Execution Integrity for Autonomous AI</title>
   <link rel="canonical" href="https://varqo.ai/">
@@ -14,14 +14,14 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varqo">
   <meta property="og:title" content="Varqo — Execution Integrity for Autonomous AI">
-  <meta property="og:description" content="Make autonomous workflows prove reality before they continue.">
+  <meta property="og:description" content="Authorized does not mean correct. Varqo makes consequential agent execution independently verifiable and safe to continue.">
   <meta property="og:url" content="https://varqo.ai/">
   <meta property="og:image" content="https://varqo.ai/varqo-logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Varqo — Execution Integrity for Autonomous AI">
-  <meta name="twitter:description" content="Make autonomous workflows prove reality before they continue.">
+  <meta name="twitter:description" content="Authorized does not mean correct. Varqo makes consequential agent execution independently verifiable and safe to continue.">
   <meta name="twitter:image" content="https://varqo.ai/varqo-logo.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Varqo","url":"https://varqo.ai/","logo":"https://varqo.ai/varqo-logo.png","email":"contact@varqo.ai","description":"Execution integrity for autonomous AI workflows."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Varqo","url":"https://varqo.ai/","logo":"https://varqo.ai/varqo-logo.png","email":"contact@varqo.ai","description":"Execution integrity for autonomous AI agents and workflows."}</script>
 </head>
 <body>
   <div class="grid" aria-hidden="true"></div>
@@ -40,14 +40,14 @@
   <main>
     <div class="container hero">
       <div>
-        <div class="eyebrow">Early technical POC · Design partners</div>
-        <h1>Make autonomous workflows <span>prove reality</span> before they continue.</h1>
-        <p class="hero-copy">Varqo independently verifies the states AI agents rely on, holds dependent actions when proof is missing, and releases execution only after reality matches intent.</p>
+        <div class="eyebrow">Execution integrity for autonomous AI</div>
+        <h1>The integrity layer between autonomous AI and the <span>real world.</span></h1>
+        <p class="hero-copy">Agents can be fully authorized and still be wrong. Varqo independently verifies the facts and system states consequential workflows rely on, holds dependent actions while proof is missing, and releases execution only when reality satisfies the required outcome.</p>
         <div class="actions">
           <a class="button primary" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Explore an early pilot <span aria-hidden="true">→</span></a>
-          <a class="button" href="/how-it-works/">See how it works</a>
+          <a class="button" href="/how-it-works/">See the control loop</a>
         </div>
-        <p class="hero-note">Built for consequential agent actions across cloud and enterprise systems.</p>
+        <p class="hero-note">Early technical POC · Built for consequential agent actions across cloud and enterprise systems.</p>
       </div>
 
       <aside class="proof" aria-label="Example Varqo verification chain">
@@ -61,6 +61,25 @@
         </div>
       </aside>
     </div>
+
+    <section class="section" aria-labelledby="architecture-heading">
+      <div class="container scenario">
+        <div class="scenario-copy reveal">
+          <span class="kicker">Product north star</span>
+          <h2 id="architecture-heading">From permission to provable autonomous execution.</h2>
+          <p>IAM answers whether an agent <em>can</em> act. Varqo is built to answer whether the workflow <em>should continue now</em>, given independently verified reality.</p>
+          <p>The long-term product is a closed integrity loop: understand what matters, verify it, control continuation, recover safely when reality diverges, and preserve evidence of every decision.</p>
+          <p class="technical-note"><strong>Current POC:</strong> VERIFY is the live-proven technical kernel; CONTROL and PROVE are partially implemented. Broader KNOW and generic automated RECOVER remain product direction.</p>
+        </div>
+        <div class="scenario-flow reveal" aria-label="Varqo product architecture">
+          <div class="scenario-step"><span class="who">Know</span><strong>Understand claims, context, and dependencies</strong><em>CONTEXT</em></div>
+          <div class="scenario-step"><span class="who">Verify</span><strong>Observe authoritative reality independently</strong><em>PROVE STATE</em></div>
+          <div class="scenario-step"><span class="who">Control</span><strong>Allow, hold, or block dependent execution</strong><em>DECIDE</em></div>
+          <div class="scenario-step"><span class="who">Recover</span><strong>Restore a verified state when it is safe</strong><em>RECONCILE</em></div>
+          <div class="scenario-step"><span class="who">Prove</span><strong>Preserve why execution continued or stopped</strong><em>EVIDENCE</em></div>
+        </div>
+      </div>
+    </section>
 
     <section class="action-section" aria-labelledby="action-heading">
       <div class="container">
@@ -109,15 +128,15 @@
     <section class="home-paths" aria-label="Explore Varqo">
       <div class="container path-grid reveal">
         <a class="path-card" href="/problem/"><span class="path-number">01 / WHY</span><h2>The problem</h2><p>Why authorization and successful tool responses are not enough for autonomous execution.</p><span class="path-arrow">Explore the integrity gap →</span></a>
-        <a class="path-card" href="/how-it-works/"><span class="path-number">02 / HOW</span><h2>How Varqo works</h2><p>From workflow dependencies to independent proof, controlled continuation, and the recovery model for divergence.</p><span class="path-arrow">See the control loop →</span></a>
-        <a class="path-card" href="/evidence/"><span class="path-number">03 / PROOF</span><h2>Technical evidence</h2><p>Live results across DigitalOcean, Azure, AWS, and a real tool-using agent.</p><span class="path-arrow">Review the evidence →</span></a>
+        <a class="path-card" href="/how-it-works/"><span class="path-number">02 / HOW</span><h2>How Varqo works</h2><p>From execution context to independent proof, controlled continuation, verified recovery, and evidence.</p><span class="path-arrow">See the control loop →</span></a>
+        <a class="path-card" href="/evidence/"><span class="path-number">03 / PROOF</span><h2>Technical evidence</h2><p>Live provider proofs, controlled agent gating, safe evidence persistence, and failure-path testing.</p><span class="path-arrow">Review the evidence →</span></a>
       </div>
     </section>
 
     <section class="pilot">
       <div class="container">
         <div class="pilot-card reveal">
-          <div><span class="kicker">Early design partnership</span><h2>Are your AI agents taking consequential actions in real systems?</h2><p>We want to work with teams operating agents with cloud or enterprise permissions and validate where execution integrity fails in practice.</p></div>
+          <div><span class="kicker">Early design partnership</span><h2>Where would you hesitate to let an AI agent operate alone?</h2><p>Bring us one consequential workflow. We want to validate the facts, states, and dependencies that must be proven before your agent can safely continue.</p></div>
           <a class="button" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry&body=Tell%20us%20briefly%20what%20your%20agents%20do%20and%20which%20systems%20they%20can%20change.">Talk to Varqo <span aria-hidden="true">→</span></a>
         </div>
       </div>
