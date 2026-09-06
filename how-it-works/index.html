@@ -21,8 +21,8 @@
     <section class="section simulator-section">
       <div class="container">
         <div class="section-heading reveal">
-          <span class="kicker">Current control path</span>
-          <div><h2>See what changes when provider success is not enough.</h2><p class="lead">Choose a scenario and run the workflow. The simulation follows control patterns exercised in live Varqo experiments; it does not call a live provider.</p></div>
+          <span class="kicker">Control path</span>
+          <div><h2>See what changes when provider success is not enough.</h2><p class="lead">Choose a scenario and run the workflow. The simulation follows control patterns exercised in Varqo experiments; it does not call a live provider.</p></div>
         </div>
 
         <div class="simulator reveal" data-simulator>
@@ -32,7 +32,7 @@
               <button class="scenario-option" type="button" data-scenario="false-success" aria-pressed="false"><span>02</span> False provider success</button>
               <button class="scenario-option" type="button" data-scenario="timeout" aria-pressed="false"><span>03</span> Verifier timeout</button>
             </div>
-            <div class="simulator-label"><i aria-hidden="true"></i> Based on live validated control patterns</div>
+            <div class="simulator-label"><i aria-hidden="true"></i> Based on exercised control patterns</div>
           </div>
 
           <div class="simulator-body">
@@ -67,7 +67,7 @@
           <article class="principle reveal"><h3>Safe retry</h3><p>Retry only when the operation is known to be safe or idempotent and duplication risk is controlled.</p></article>
           <article class="principle reveal"><h3>Re read and reconcile</h3><p>Observe authoritative state again and reconcile when the system may still be converging or reality changed outside the agent.</p></article>
           <article class="principle reveal"><h3>Compensate or roll back</h3><p>Execute a known corrective action when returning to a safe state requires explicit compensation or rollback.</p></article>
-          <article class="principle reveal"><h3>Human escalation</h3><p>If Varqo cannot prove automatic recovery is safe, keep dependent execution held and require a human decision instead of guessing.</p></article>
+          <article class="principle reveal"><h3>Human escalation</h3><p>If automatic recovery cannot be proven safe, keep dependent execution held and require a human decision instead of guessing.</p></article>
         </div>
       </div>
     </section>
