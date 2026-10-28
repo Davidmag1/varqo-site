@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://varqo.ai/varqo-logo.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Varqo","url":"https://varqo.ai/","logo":"https://varqo.ai/varqo-logo.png","email":"contact@varqo.ai","description":"The reality layer for autonomous AI, focused on execution integrity for consequential actions."}</script>
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="grid" aria-hidden="true"></div>
   <header class="site-header">
@@ -70,6 +70,7 @@
       <div class="container">
         <div class="section-heading reveal"><span class="kicker">One integrity loop</span><div><h2 id="architecture-heading">More autonomy.<br><span class="muted-heading">Grounded in reality.</span></h2><p class="lead">Know what the workflow depends on. Verify what actually happened. Let evidence decide what comes next.</p></div></div>
         <div class="loop-track reveal" aria-label="Product control loop and capability status">
+          <svg class="loop-line" viewBox="0 0 1200 340" preserveAspectRatio="none" aria-hidden="true"><path d="M10 180C130 180 150 40 275 40S430 275 535 275 685 80 780 80 995 235 1185 235"/></svg>
           <a href="/how-it-works/#north-star" class="loop-node"><span class="loop-index">01</span><h3>Know</h3><p>Understand the claims, context, and dependencies.</p><span class="scope direction">Product direction</span></a>
           <a href="/evidence/#live-proofs" class="loop-node"><span class="loop-index">02</span><h3>Verify</h3><p>Read authoritative state independently.</p><span class="scope">Live proof</span></a>
           <a href="/evidence/#live-proofs" class="loop-node"><span class="loop-index">03</span><h3>Control</h3><p>Allow, hold, or block the dependent action.</p><span class="scope">Scoped live gate</span></a>
@@ -128,12 +129,20 @@
     <section class="lab-feature section" aria-labelledby="lab-heading">
       <div class="container lab-feature-grid">
         <div class="reveal"><span class="kicker">Now in the local lab</span><h2 id="lab-heading">Make the failure<br><span class="muted-heading">visible.</span></h2><p class="lead">Start a workflow. Inspect what the provider said and what Varqo independently observed. Understand exactly why the next step was held, blocked, or released.</p><ul class="feature-list"><li>Five fixed scenarios in the local console</li><li>Saved runs and projected evidence export</li><li>Resume captured proof without repeating the write</li></ul><a class="button primary" href="/lab/">Explore the local lab <span aria-hidden="true">↗</span></a><p class="section-footnote">Real kernel. Synthetic provider. Local evaluation only.</p></div>
-        <div class="lab-preview reveal"><div class="lab-preview-bar"><span class="status-dot" aria-hidden="true"></span> LOCAL WORKFLOW CONSOLE <span class="scope local">Illustrative view</span></div><div class="lab-preview-body"><span class="label">Success without the outcome</span><div class="lab-preview-title"><h3>Activation workflow</h3><span class="scope held">HELD</span></div><div class="observation"><span>Provider action</span><strong>completed <span aria-hidden="true">✓</span></strong></div><div class="observation mismatch"><span>Required resource state</span><strong>active</strong></div><div class="observation mismatch"><span>Observed resource state</span><strong>off</strong></div><div class="lab-decision"><span class="label">Why execution stopped</span><p>Action completed. Required state not proven.</p><div><span>Provider writes <strong>1</strong></span><span>Dependent effects <strong>0</strong></span></div></div></div><a class="lab-preview-link" href="/lab/#scenarios">Explore the five scenarios <span aria-hidden="true">→</span></a></div>
+        <figure class="outcome-study reveal" aria-labelledby="outcome-study-caption">
+          <div class="study-header"><span>01 / THE OUTCOME GAP</span><span class="scope local">Illustration</span></div>
+          <div class="study-response"><span class="label">Provider response</span><strong>completed <span aria-hidden="true">✓</span></strong></div>
+          <svg class="study-connector" viewBox="0 0 500 300" preserveAspectRatio="none" aria-hidden="true"><path d="M70 0V40Q70 80 110 80H380Q420 80 420 120V300"/><path d="m411 287 9 12 9-12"/></svg>
+          <div class="study-required"><span class="label">Required state</span><strong>active<span aria-hidden="true">.</span></strong></div>
+          <div class="study-observed"><span class="label">Observed state</span><strong>off<span aria-hidden="true">.</span></strong><span class="study-verdict">HOLD</span></div>
+          <figcaption id="outcome-study-caption">Action completed. Required state not proven.<br><span>1 provider write · 0 dependent effects</span></figcaption>
+          <a class="study-link" href="/lab/#scenarios">Explore the five scenarios <span aria-hidden="true">↗</span></a>
+        </figure>
       </div>
     </section>
 
     <section class="home-paths" aria-label="Explore Varqo">
-      <div class="container path-grid reveal">
+      <div class="container path-grid reveal"><span class="kicker path-kicker">Keep exploring</span>
         <a class="path-card" href="/problem/"><span class="path-number">01 / WHY</span><h2>The problem</h2><p>Why authorization and successful tool responses are not enough for autonomous execution.</p><span class="path-arrow">Explore the integrity gap →</span></a>
         <a class="path-card" href="/how-it-works/"><span class="path-number">02 / HOW</span><h2>How Varqo works</h2><p>From execution context to independent proof, consequence aware control, verified recovery, and evidence.</p><span class="path-arrow">See the control loop →</span></a>
         <a class="path-card" href="/evidence/"><span class="path-number">03 / PROOF</span><h2>Technical evidence</h2><p>Live provider proofs, controlled agent gating, safe evidence persistence, and failure path testing.</p><span class="path-arrow">Review the evidence →</span></a>
