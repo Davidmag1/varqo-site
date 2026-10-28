@@ -59,3 +59,17 @@ David owns the public design and publishing decision. Ask an unfamiliar platform
 engineer to explain, using only the site, why an action can complete while a
 workflow remains held, which capabilities are local, and what remains unproven.
 Failure to distinguish those boundaries means the copy needs another pass.
+
+## Visual follow-up — open compositions
+
+The layout follow-up responds to excessive repeated card containers. It changes
+presentation rather than product scope: open, staggered control-loop nodes follow
+a shared SVG path; state differences use large integrated typography; recorded
+traces share the dark section background; evidence becomes full-width records;
+principles become open numbered text; further-reading links become editorial
+rows; and the contact section becomes a full-width band. The local scenario
+result and how-it-works simulator retain purposeful technical surfaces.
+
+The homepage illustration preserves completed / required active / observed off /
+HOLD and the same one-write, zero-effect example. It remains clearly labeled as
+an illustration. All existing public evidence and future-capability labels remain.
