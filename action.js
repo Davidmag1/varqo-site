@@ -2,7 +2,7 @@
   const consoleEl = document.querySelector('[data-action-console]');
   if (!consoleEl) return;
 
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = () => window.varqoReducedMotion?.() ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const runs = {
     mismatch: {
       title: 'Provider success. Workflow held.',
@@ -83,7 +83,7 @@
     metric.textContent = run.metric;
     summary.removeAttribute('data-result');
     button.disabled = false;
-    button.innerHTML = 'Play real run <span aria-hidden="true">→</span>';
+    button.innerHTML = 'Play recorded run <span aria-hidden="true">→</span>';
     events.innerHTML = run.events.map((event) => `
       <div class="action-event">
         <span class="action-time">${event[0]}</span>
@@ -107,7 +107,7 @@
     renderRun();
     const run = runs[selected];
     const rows = [...events.querySelectorAll('.action-event')];
-    const interval = reducedMotion ? 70 : 520;
+    const interval = reducedMotion() ? 0 : 520;
     button.disabled = true;
     button.textContent = 'Playing recorded trace…';
 
@@ -124,7 +124,7 @@
       copy.textContent = run.copy;
       summary.dataset.result = run.result;
       button.disabled = false;
-      button.innerHTML = 'Replay real run <span aria-hidden="true">↻</span>';
+      button.innerHTML = 'Replay recorded run <span aria-hidden="true">↻</span>';
     }, interval * rows.length));
   });
 

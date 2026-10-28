@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7faf8">
   <meta name="description" content="AI agents can be authorized to act and still continue from false assumptions or unverified system state. Varqo addresses this execution integrity gap by verifying reality before consequential actions proceed.">
-  <title>The Problem — Varqo</title><link rel="canonical" href="https://varqo.ai/problem/"><link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/styles.css">
+  <title>The Problem — Varqo</title><link rel="canonical" href="https://varqo.ai/problem/"><link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/experience.css">
   <meta property="og:type" content="website"><meta property="og:title" content="The execution integrity gap — Varqo"><meta property="og:description" content="Authorized does not mean correct. Consequential AI actions need verified reality, not just permission."><meta property="og:url" content="https://varqo.ai/problem/"><meta property="og:image" content="https://varqo.ai/varqo-logo.png">
+  <meta name="twitter:card" content="summary_large_image"><meta property="og:site_name" content="Varqo">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="grid" aria-hidden="true"></div>
-  <header class="site-header"><nav class="container nav" aria-label="Main navigation"><a class="brand" href="/" aria-label="Varqo home"><img src="/varqo-logo.png" alt="Varqo"></a><div class="nav-links"><a href="/problem/" aria-current="page">The problem</a><a href="/how-it-works/">How it works</a><a href="/evidence/">Evidence</a><a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Early pilot</a></div></nav></header>
-  <main>
+  <header class="site-header"><nav class="container nav" aria-label="Main navigation"><a class="brand" href="/" aria-label="Varqo home"><img src="/varqo-logo.png" alt="Varqo"></a><button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button><div class="nav-links" id="main-nav"><a href="/problem/" aria-current="page">The problem</a><a href="/how-it-works/">How it works</a><a href="/evidence/">Evidence</a><a href="/lab/">Local lab</a><a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Build with us <span aria-hidden="true">↗</span></a></div></nav></header>
+  <main id="main" tabindex="-1">
     <section class="page-hero"><div class="container"><div class="eyebrow">The execution integrity gap</div><h1>Agents can be authorized and still be <span>wrong.</span></h1><p class="lead">Identity, permissions, and tool controls answer whether an agent can act. They do not fully answer whether the facts and system states behind a consequential decision are true, or whether the workflow is safe to continue.</p></div></section>
 
     <section class="section"><div class="container"><div class="section-heading reveal"><span class="kicker">What existing controls answer</span><div><h2>Permission is necessary. It is not proof.</h2><p class="lead">An agent may use the correct identity, call an approved tool, receive a successful response, and still act on a false assumption or incomplete outcome.</p></div></div><div class="cards-three reveal"><article><span class="number">01 / ACCESS</span><h3>Identity and authorization</h3><p>Who is the agent, which systems can it access, and which actions is it permitted to perform?</p></article><article><span class="number">02 / ACTIVITY</span><h3>Behavior and tool use</h3><p>Is the agent overprivileged, off task, or calling an allowed tool in a dangerous way?</p></article><article class="dark"><span class="number">03 / INTEGRITY</span><h3>Verified reality</h3><p>Are the facts and system states that justify this consequential action actually true right now?</p></article></div></div></section>
@@ -22,6 +24,6 @@
 
     <section class="next-page"><div class="container"><a class="next-card reveal" href="/how-it-works/"><div><span class="kicker">Next</span><h2>See how Varqo verifies reality and controls continuation.</h2></div><span class="arrow" aria-hidden="true">→</span></a></div></section>
   </main>
-  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Reality layer for autonomous AI.</span><div class="footer-links"><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer><script src="/site.js" defer></script>
+  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Reality layer for autonomous AI.</span><div class="footer-links"><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer><script src="/experience.js" defer></script><script src="/site.js" defer></script>
 </body>
 </html>

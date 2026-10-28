@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/action.css">
+  <link rel="stylesheet" href="/experience.css">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Varqo">
   <meta property="og:title" content="Varqo — Reality Layer for Autonomous AI">
@@ -24,61 +25,58 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Varqo","url":"https://varqo.ai/","logo":"https://varqo.ai/varqo-logo.png","email":"contact@varqo.ai","description":"The reality layer for autonomous AI, focused on execution integrity for consequential actions."}</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="grid" aria-hidden="true"></div>
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
       <a class="brand" href="/" aria-label="Varqo home"><img src="/varqo-logo.png" alt="Varqo"></a>
-      <div class="nav-links">
+      <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button><div class="nav-links" id="main-nav">
         <a href="/problem/">The problem</a>
         <a href="/how-it-works/">How it works</a>
         <a href="/evidence/">Evidence</a>
-        <a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Early pilot</a>
+        <a href="/lab/">Local lab</a><a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Build with us <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <div class="container hero">
-      <div>
-        <div class="eyebrow">Reality layer for autonomous AI</div>
-        <h1>Verify reality before autonomous workflows <span>continue.</span></h1>
-        <p class="hero-copy">Agents can be fully authorized and still be wrong. Varqo is built to verify the facts an action relies on and the resulting state after an action changes the world, then use evidence to allow, hold, block, or recover. Enforcement stays close to the action, so ordinary agent traffic does not need to traverse a central Varqo proxy.</p>
-        <div class="actions">
-          <a class="button primary" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Explore an early pilot <span aria-hidden="true">→</span></a>
-          <a class="button" href="/how-it-works/">See the control loop</a>
+  <main id="main" tabindex="-1">
+    <section class="hero-stage" aria-labelledby="hero-heading">
+      <div class="container hero">
+        <div class="hero-editorial">
+          <div class="eyebrow">The reality layer for autonomous AI</div>
+          <h1 id="hero-heading">Agents act.<br>Reality <span>decides.</span></h1>
+          <p class="hero-copy">A successful tool call is only half the story. Varqo independently verifies the resulting state before the next consequential action continues.</p>
+          <div class="actions">
+            <a class="button primary" href="#action-heading">Watch the proof <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Build with us <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="hero-note"><span class="status-dot" aria-hidden="true"></span> Technical POC · Exploring design partnerships</p>
         </div>
-        <p class="hero-note">Early technical POC · Consequence aware enforcement across cloud and enterprise systems.</p>
+        <figure class="reality-scene" data-reality-scene data-phase="held" aria-label="Illustration: a completed provider action stays held until an independent read verifies the required resource state.">
+          <div class="scene-orbits" aria-hidden="true"><i></i><i></i><i></i><div class="orbit-particle"></div></div>
+          <div class="scene-axis axis-horizontal" aria-hidden="true"></div><div class="scene-axis axis-vertical" aria-hidden="true"></div>
+          <div class="scene-tag scene-tag-top">01 / ACTION → OBSERVATION</div>
+          <div class="signal-card signal-action"><span class="signal-icon" aria-hidden="true">↗</span><div><span class="signal-label">Provider response</span><strong>Action completed</strong></div><span class="signal-check" aria-hidden="true">✓</span></div>
+          <div class="integrity-core"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8H8v14M42 8h14v14M8 42v14h14M56 42v14H42"/><path class="core-diamond" d="m32 18 14 14-14 14-14-14Z"/></svg><strong>varqo</strong><span>INDEPENDENT VERIFICATION</span></div>
+          <div class="signal-card signal-reality"><span class="signal-icon" aria-hidden="true">◎</span><div><span class="signal-label">Observed reality</span><strong data-reality-state>Resource still off</strong></div><span class="state-light" aria-hidden="true"></span></div>
+          <div class="signal-gate"><span>Dependent action</span><strong data-reality-gate>HOLD</strong><span class="gate-arrow" aria-hidden="true">→</span></div>
+          <figcaption>Animated illustration · no live provider connection <button class="motion-toggle" data-motion-toggle type="button" aria-pressed="false" hidden>Pause motion</button></figcaption>
+        </figure>
       </div>
+      <div class="container proof-strip"><span>Controlled live proof across</span><div><strong>DigitalOcean</strong><strong>Microsoft Azure</strong><strong>AWS CodeBuild</strong><strong>Tool-using AI agent</strong></div><a href="/evidence/">Explore the evidence <span aria-hidden="true">↗</span></a></div>
+    </section>
 
-      <aside class="proof" aria-label="Example Varqo verification chain">
-        <div class="proof-bar"><span>Verification chain · live pattern</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
-        <div class="proof-body">
-          <div class="intent"><span class="label">Agent intent</span><strong>Power on cloud machine</strong></div>
-          <div class="proof-row"><i class="dot"></i><div class="proof-main"><strong>Provider action</strong><span>status = completed</span></div><span class="verdict">OBSERVED</span></div>
-          <div class="proof-row hold"><i class="dot"></i><div class="proof-main"><strong>Independent resource read</strong><span>machine.state = off</span></div><span class="verdict">HOLD</span></div>
-          <div class="proof-row verified"><i class="dot"></i><div class="proof-main"><strong>Independent resource read</strong><span>machine.state = active</span></div><span class="verdict">VERIFIED</span></div>
-          <div class="proof-result"><span>Dependent workflow action</span><strong>RELEASED</strong></div>
+    <section class="integrity-section section" aria-labelledby="architecture-heading">
+      <div class="container">
+        <div class="section-heading reveal"><span class="kicker">One integrity loop</span><div><h2 id="architecture-heading">More autonomy.<br><span class="muted-heading">Grounded in reality.</span></h2><p class="lead">Know what the workflow depends on. Verify what actually happened. Let evidence decide what comes next.</p></div></div>
+        <div class="loop-track reveal" aria-label="Product control loop and capability status">
+          <a href="/how-it-works/#north-star" class="loop-node"><span class="loop-index">01</span><h3>Know</h3><p>Understand the claims, context, and dependencies.</p><span class="scope direction">Product direction</span></a>
+          <a href="/evidence/#live-proofs" class="loop-node"><span class="loop-index">02</span><h3>Verify</h3><p>Read authoritative state independently.</p><span class="scope">Live proof</span></a>
+          <a href="/evidence/#live-proofs" class="loop-node"><span class="loop-index">03</span><h3>Control</h3><p>Allow, hold, or block the dependent action.</p><span class="scope">Scoped live gate</span></a>
+          <a href="/lab/#recovery" class="loop-node"><span class="loop-index">04</span><h3>Recover</h3><p>Resume pending proof after a local restart.</p><span class="scope local">Local lab</span></a>
+          <a href="/evidence/#local-evidence" class="loop-node"><span class="loop-index">05</span><h3>Prove</h3><p>Preserve the evidence behind the decision.</p><span class="scope local">Scoped implementation</span></a>
         </div>
-      </aside>
-    </div>
-
-    <section class="section" aria-labelledby="architecture-heading">
-      <div class="container scenario">
-        <div class="scenario-copy reveal">
-          <span class="kicker">The Varqo control loop</span>
-          <h2 id="architecture-heading">From permission to provable autonomous execution.</h2>
-          <p>IAM answers whether an agent <em>can</em> act. Varqo is built to answer whether the workflow <em>should continue now</em>, given independently verified reality.</p>
-          <p>The long term product is a closed integrity loop: understand what matters, verify it, control continuation, recover safely when reality diverges, and preserve evidence of every decision.</p>
-          <p>Varqo coordinates verification intelligence through a central integrity control plane while enforcement can run close to the action through runtime adapters, SDKs, existing gateways, tool boundaries, workload integrations, or provider connectors. Verification depth is proportional to consequence, uncertainty, and dependency.</p>
-          <p class="technical-note"><strong>Current POC:</strong> VERIFY is the live proven technical kernel; CONTROL and PROVE are partially implemented. Broader KNOW and generic automated RECOVER remain product direction.</p>
-        </div>
-        <div class="scenario-flow reveal" aria-label="Varqo product architecture">
-          <div class="scenario-step"><span class="who">Know</span><strong>Understand claims, context, and dependencies</strong><em>CONTEXT</em></div>
-          <div class="scenario-step"><span class="who">Verify</span><strong>Observe authoritative reality independently</strong><em>PROVE STATE</em></div>
-          <div class="scenario-step"><span class="who">Control</span><strong>Allow, hold, or block dependent execution</strong><em>DECIDE</em></div>
-          <div class="scenario-step"><span class="who">Recover</span><strong>Restore a verified state when it is safe</strong><em>RECONCILE</em></div>
-          <div class="scenario-step"><span class="who">Prove</span><strong>Preserve why execution continued or stopped</strong><em>EVIDENCE</em></div>
-        </div>
+        <p class="section-footnote reveal">The full loop is the product direction. Generic recovery, memory integrity, and broad cross-system enforcement remain open work.</p>
       </div>
     </section>
 
@@ -87,9 +85,10 @@
         <div class="action-intro reveal">
           <span class="kicker">Varqo in action</span>
           <div>
-            <h2 id="action-heading">Recorded live runs. Sanitized for public view.</h2>
+            <h2 id="action-heading">See the moment<br>proof changes the outcome.</h2>
             <p class="lead">Replay three control paths already exercised against real providers and a real tool using AI agent. The traces preserve the decision sequence while removing infrastructure identifiers and sensitive runtime data.</p>
-            <span class="action-proof-note">Not simulated · recorded from controlled live experiments</span>
+            <noscript><p>Enable JavaScript to replay these curated sequences, or <a href="/evidence/">read the technical evidence</a>.</p></noscript>
+            <span class="action-proof-note">Recorded live experiments · curated playback, not a live connection</span>
           </div>
         </div>
 
@@ -119,10 +118,17 @@
           </div>
 
           <div class="action-footer">
-            <span>Public trace data is intentionally redacted; no credentials, provider resource IDs, or private repository links are exposed.</span>
+            <span>Condensed, sanitized experiment sequences. Playback timing is illustrative; recorded measurements are labeled.</span>
             <a href="/evidence/">See the technical evidence →</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="lab-feature section" aria-labelledby="lab-heading">
+      <div class="container lab-feature-grid">
+        <div class="reveal"><span class="kicker">Now in the local lab</span><h2 id="lab-heading">Make the failure<br><span class="muted-heading">visible.</span></h2><p class="lead">Start a workflow. Inspect what the provider said and what Varqo independently observed. Understand exactly why the next step was held, blocked, or released.</p><ul class="feature-list"><li>Five fixed scenarios in the local console</li><li>Saved runs and projected evidence export</li><li>Resume captured proof without repeating the write</li></ul><a class="button primary" href="/lab/">Explore the local lab <span aria-hidden="true">↗</span></a><p class="section-footnote">Real kernel. Synthetic provider. Local evaluation only.</p></div>
+        <div class="lab-preview reveal"><div class="lab-preview-bar"><span class="status-dot" aria-hidden="true"></span> LOCAL WORKFLOW CONSOLE <span class="scope local">Illustrative view</span></div><div class="lab-preview-body"><span class="label">Success without the outcome</span><div class="lab-preview-title"><h3>Activation workflow</h3><span class="scope held">HELD</span></div><div class="observation"><span>Provider action</span><strong>completed <span aria-hidden="true">✓</span></strong></div><div class="observation mismatch"><span>Required resource state</span><strong>active</strong></div><div class="observation mismatch"><span>Observed resource state</span><strong>off</strong></div><div class="lab-decision"><span class="label">Why execution stopped</span><p>Action completed. Required state not proven.</p><div><span>Provider writes <strong>1</strong></span><span>Dependent effects <strong>0</strong></span></div></div></div><a class="lab-preview-link" href="/lab/#scenarios">Explore the five scenarios <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
 
@@ -144,8 +150,8 @@
     </section>
   </main>
 
-  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Reality layer for autonomous AI.</span><div class="footer-links"><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
-  <script src="/site.js" defer></script>
+  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Reality layer for autonomous AI.</span><div class="footer-links"><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
+  <script src="/experience.js" defer></script><script src="/site.js" defer></script>
   <script src="/action.js" defer></script>
 </body>
 </html>

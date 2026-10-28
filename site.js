@@ -1,7 +1,7 @@
 (() => {
   const header = document.querySelector('.site-header');
   const year = document.querySelector('[data-year]');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = () => window.varqoReducedMotion?.() ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (year) year.textContent = String(new Date().getFullYear());
   if (header) {
@@ -11,7 +11,7 @@
   }
 
   const elements = document.querySelectorAll('.reveal');
-  if (reducedMotion || !('IntersectionObserver' in window)) {
+  if (reducedMotion() || !('IntersectionObserver' in window)) {
     elements.forEach((element) => element.classList.add('visible'));
   } else {
     const observer = new IntersectionObserver((entries) => {
@@ -22,6 +22,7 @@
       });
     }, { threshold: .12 });
 
+    document.documentElement.classList.add('motion-ready');
     elements.forEach((element) => observer.observe(element));
   }
 
@@ -109,7 +110,7 @@
     runButton.disabled = true;
     runButton.textContent = 'Running verification…';
     const scenario = scenarios[selected];
-    const interval = reducedMotion ? 80 : 650;
+    const interval = reducedMotion() ? 0 : 650;
 
     scenario.events.forEach((event, index) => {
       timers.push(window.setTimeout(() => {
