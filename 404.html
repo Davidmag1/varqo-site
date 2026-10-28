@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, follow">
   <title>Page Not Found — Varqo</title>
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/experience.css">
   <style>
     .error-page { min-height: calc(100vh - 75px); display: grid; place-items: center; padding: 72px 0 110px; }
     .error-shell { width: min(920px, 100%); }
@@ -18,20 +18,21 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="grid" aria-hidden="true"></div>
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
       <a class="brand" href="/" aria-label="Varqo home"><img src="/varqo-logo.png" alt="Varqo"></a>
-      <div class="nav-links">
+      <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button><div class="nav-links" id="main-nav">
         <a href="/problem/">The problem</a>
         <a href="/how-it-works/">How it works</a>
         <a href="/evidence/">Evidence</a>
-        <a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Early pilot</a>
+        <a href="/lab/">Local lab</a><a class="nav-cta" href="mailto:contact@varqo.ai?subject=Varqo%20design%20partner%20inquiry">Build with us <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
 
-  <main class="error-page">
+  <main id="main" tabindex="-1" class="error-page">
     <div class="container">
       <section class="error-shell" aria-labelledby="error-title">
         <span class="error-code">404</span>
@@ -47,7 +48,7 @@
     </div>
   </main>
 
-  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Execution integrity for autonomous AI.</span><div class="footer-links"><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
-  <script src="/site.js" defer></script>
+  <footer><div class="container footer-inner"><span>© <span data-year>2026</span> Varqo. Execution integrity for autonomous AI.</span><div class="footer-links"><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button><a href="https://www.linkedin.com/company/144802025" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:contact@varqo.ai">contact@varqo.ai</a></div></div></footer>
+  <script src="/experience.js" defer></script><script src="/site.js" defer></script>
 </body>
 </html>
